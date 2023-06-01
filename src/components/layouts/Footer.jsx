@@ -2,10 +2,9 @@ import React from "react";
 const Footer=()=>{
     return(
         <div className="container">
-            <div className="flex  gap-24 py-24 border-b-2">
+            <div className="flex gap-24 py-24 border-b-2">
                 <div>
                     <p className="text-light w-[285px] pt-52">400 University Drive Suite 200 Coral Gables, <br/>FL 33134 USA</p>
-
                 </div>
                 <div>
                     <p className="mb-12 text-light">Links</p>
@@ -30,7 +29,7 @@ const Footer=()=>{
                     
                 </div>
             </div>
-            <footer className="text-base py-9">2022 Meubel House. All rights reverved</footer>
+            <footer className="text-base py-9 ">2022 Meubel House. All rights reverved</footer>
         </div>
     )
 }

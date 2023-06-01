@@ -31,6 +31,7 @@ module.exports = {
           lineHeight:'72px',
         }],
 
+       '3xl':['32px','48px'],
        
         '2xl':['24px',{
           lineHeight:'36px',

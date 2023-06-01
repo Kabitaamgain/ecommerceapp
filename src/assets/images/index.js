@@ -10,6 +10,21 @@ export{default as Image9} from "./Rectangle 13.png";
 export{default as Image10} from "./Rectangle 14.png";
 export{default as Image11} from "./Rectangle 15.png";
 export{default as Image12} from "./Shopbackground.png";
+export{default as Image13} from "./Grain coffee table 1.png";
+export{default as Image14} from "./Kent coffee table 1.png";
+export{default as Image15} from "./Mask group.png";
+export{default as Image16} from "./Mask group (1).png";
+export{default as Image17} from "./Plain console_ 1.png";
+export{default as Image18} from "./Reclaimed teak Sideboard 1.png";
+export{default as Image19} from "./SJP_0825  1.png";
+export{default as Image20} from "./Bella chair and table 1.png";
+export{default as Image21} from "./Maya sofa three seater 1.png";
+export{default as Image22} from "./Outdoor sofa set 1.png";
+
+
+
+
+
 
 
 

@@ -1,11 +1,14 @@
 import React from "react";
 import * as Icons from "../../assets/icons"
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
-export const Navbar =()=>{
+    
+    export const Navbar =()=>{
+        const location = useLocation();
     return(
-        <div >
-            <div className="bg-primary">
+        <div>
+            <div className={`${location.pathname==='/' ? "bg-primary" :""}`}>
         <nav className="flex justify-between container py-[38px]">
             <ul></ul>
         <ul className="flex gap-[75px]" >
@@ -22,7 +25,7 @@ export const Navbar =()=>{
            About
                 </Link> </li>
             <li>
-                <Link to='/shop'>Contact
+                <Link to='/contact'>Contact
                 </Link></li>
         </ul>
 

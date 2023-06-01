@@ -36,7 +36,7 @@ export const Toppicks=()=>{
         <div className="pt-14 container">
             <div className="text-center">
                 <h2 className="text-4xl">Top Picks For You</h2>
-                <p>Find a bright ideal to suit your taste with our great selection of suspension, floor and table lights.</p>
+                <p>Find a bright ideal to suit your taste  -th our great selection of suspension, floor and table lights.</p>
             </div>
 
             <div className="flex gap-7">
@@ -45,7 +45,7 @@ export const Toppicks=()=>{
          return(
             <ToppicksCard key={index} imgSrc={imgSrc} imgAlt={imgAlt} title={title} price={price}/>
          )
-                })}
+                })} 
                 </div>
 <div className="text-center  py-16">
                 <Button
