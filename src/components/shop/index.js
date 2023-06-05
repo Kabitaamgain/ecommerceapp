@@ -3,11 +3,11 @@ import { Shop } from "./Shop";
 import { Categories } from "./Categories";
 import { Services } from "./Services";
 import { BtnBackground } from "./BtnBackground";
-const ShopPage=()=>{
+const ShopPage=({items})=>{
     return(
         <div>
             <Shop/>
-            <Categories/>
+            <Categories items={items}/>
             <BtnBackground/>
             <Services/>
         </div>

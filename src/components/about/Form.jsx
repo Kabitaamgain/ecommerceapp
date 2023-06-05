@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
-export const Form=()=>{
-    const [items,setItems]=useState([])
+export const Form=({datas,setDatas})=>{
     const [isEdit,setisEdit]=useState(false);
     const[values ,setvalues]=useState({
         image:"",
@@ -35,25 +34,25 @@ const handleSubmit=(e)=>{
       detail: ""
     });
   
-    setItems([...items,values]);
+    setDatas([...datas,values]);
     if(isEdit){
-      const index = items.findIndex((item) => item.id === values.id);
-      const newItem = [...items];
+      const index = datas.findIndex((item) => item.id === values.id);
+      const newItem = [...datas];
       newItem.splice(index, 1, values);
-      setItems(newItem);
+      setDatas(newItem);
       
     setisEdit(false);
     }
      else {
       const id = uuidv4();
-      setItems([{ id, ...values }, ...items]);
+      setDatas([{ id, ...values }, ...datas]);
     }
    
 }
 const deleteTableRows = (index)=>{
-    const rows = [...items];
+    const rows = [...datas];
     rows.splice(index, 1);
-    setItems(rows);
+    setDatas(rows);
 }
 const handleEdit = (item) => {
     setisEdit(true);
@@ -91,7 +90,7 @@ const handleEdit = (item) => {
                         </tr>
                     </thead>
                     <tbody>
-                    {items.map((item,index)=>(
+                    {datas.map((item,index)=>(
                   <tr className="border-b" key={index}>
                     <td className="px-4 py-2">{item.id}</td>
                     <td className="px-4 py-2">  {item.image && (

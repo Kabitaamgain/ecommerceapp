@@ -1,11 +1,14 @@
 import React from "react";
 
-export const ToppicksCard=({title,imgSrc,imgAlt,path,price})=>{
+export const ToppicksCard=(props)=>{
+  const{title,src,imgAlt,price}=props
 return(
  
     <div className="flex flex-col">
       <div className="h-64 w-64">
-  <img src={imgSrc} alt={imgAlt} className="h-64 w-64" />
+        {src && (
+  <img src={URL.createObjectURL(src)} alt={imgAlt} className="h-64 w-64" />
+  )}
   </div>
   <div>
   <h5 className="text-base">{title}</h5>

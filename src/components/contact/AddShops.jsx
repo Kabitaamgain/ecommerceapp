@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-const AddShops=()=>{
+import axios from "axios";
+
+
+const AddShops=({items,setItems})=>{
  
-    const [items, setItems] = useState([]);
+    // const [items, setItems] = useState([]);
     const [isEdit,setisEdit]=useState(false);
     const [values,setvalues]=useState({
         image:null,
@@ -17,6 +20,7 @@ const AddShops=()=>{
         if(type==="file"){
           setvalues({...values,[name]: e.target.files[0]})
         }
+      
         else{
           setvalues({
             ...values,
@@ -37,12 +41,30 @@ if(isEdit){
   newItem.splice(index, 1, values);
   setItems(newItem);
 
+axios.put(`http://localhost:5000/shop/${values.id}`,{...values})
+.then((res)=>console.log(res.data))
+.catch((error)=>console.log(error));
+
 setisEdit(false);
 }
  else {
   const id = uuidv4();
   setItems([{ id, ...values }, ...items]);
-}
+
+   axios.post("http://localhost:5000/shop",{
+  id,
+  ...values,
+  ...items
+})
+.then((response)=>console.log(response.data))
+  .catch((error)=>console.log(error));
+
+  axios.get("http://localhost:5000/shop/658d3b55-12e3-443c-b00e-16076bae07c1,")
+  .then((response)=>console.log(response))
+  .catch((error)=>console.log(error));
+  }
+
+  
 
       setvalues({
         image: null,
@@ -52,6 +74,7 @@ setisEdit(false);
       });
 
     };
+  
      const deleteTableRows = (index)=>{
       const rows = [...items];
       rows.splice(index, 1);
@@ -62,13 +85,12 @@ setisEdit(false);
   setvalues(item);
 };
 
-   
 
    return( 
    <div className="flex container">
      <div className="grid grid-cols-3 gap-">
         <form action="">
-           
+
             <div className="mb-2">
                 <label className="text-xl">Select Image:</label>
                 <input  type="file" name="image" onChange={handleChange} ></input>
@@ -133,5 +155,6 @@ setisEdit(false);
             </div>
           </div>
    )
-}
+ }
+
 export default AddShops; 

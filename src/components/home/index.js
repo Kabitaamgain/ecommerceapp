@@ -7,14 +7,14 @@ import { OurInstagram } from "./OurInstagram";
 import Firstpage from "./Firstpage";
 
 
-const HomePage = () => {
+const HomePage = (props) => {
   return (
     <>
       <Firstpage/>
       <Toptable/>
-      <Toppicks/>
+      <Toppicks {...props}/>
       <Sofa/>
-      <Blogs/>
+      <Blogs {...props}/>
       <OurInstagram/>
     </>
   );

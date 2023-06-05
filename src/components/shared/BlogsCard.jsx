@@ -9,11 +9,13 @@ import { Button } from "./Button";
 //     });
 // };
 
-export const BlogsCard=({imgSrc,imgAlt,title, createdate})=>{
+export const BlogsCard=(datas)=>{
+    const{src,imgAlt,title, createdate}=datas
 
     return(
         <div>
-            <img src={imgSrc}  alt={imgAlt} />
+            {src &&(
+            <img src={URL.createObjectURL(src)}  alt="" />)}
             <div className="text-center">
                 <h5 className="text-xl pt-8 pb-2.5">Going all-in with millennial design</h5>
              <p></p>

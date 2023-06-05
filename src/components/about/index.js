@@ -1,9 +1,9 @@
 import React from "react";
 import { Form } from "./Form";
-const AboutPage=()=>{
+const AboutPage=(props)=>{
  return(
     <div>
-<Form/>
+<Form {...props}/>
     </div>
  )
 }
