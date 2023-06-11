@@ -1,63 +1,72 @@
 import React, { useState } from "react";
-import { v4 as uuidv4 } from "uuid";
+import { useDispatch } from "react-redux";
+// import { v4 as uuidv4 } from "uuid";
+import { useSelector } from "react-redux";
+import { decrement, increment } from "../features/datas/dataAction";
 
 export const Form=({datas,setDatas})=>{
-    const [isEdit,setisEdit]=useState(false);
-    const[values ,setvalues]=useState({
-        image:"",
-        name:"",
-        phone:"",
-        detail:""
+    // const [isEdit,setisEdit]=useState(false);
+    const dispatch=useDispatch();
+    const [inputnumber,setInputNumber]=useState(0);
+    const {value}=useSelector((state)=>state.datas)
+    // const[values ,setvalues]=useState({
+    //     image:"",
+    //     name:"",
+    //     phone:"",
+    //     detail:""
 
-    });
-
-const handlechange=(e)=>{
-    const{name,value,type} = e.target;
-    if(type==="file"){
-        setvalues({...values,[name]: e.target.files[0]})
+    // });
+    const handelInputChange=(e)=>{
+      setInputNumber(parseInt(e.target.value));
     }
-    else{
-        setvalues({
-            ...values,
-            [name]:value
-        });
-    };
+
+// const handlechange=(e)=>{
+//     const{name,value,type} = e.target;
+//     if(type==="file"){
+//         setvalues({...values,[name]: e.target.files[0]})
+//     }
+//     else{
+//         setvalues({
+//             ...values,
+//             [name]:value
+//         });
+//     };
   
-}
-const handleSubmit=(e)=>{
-    e.preventDefault();
-    console.log(values);
-    setvalues({
-      image:"",
-      name: "",
-      phone: "",
-      detail: ""
-    });
+// }
+// const handleSubmit=(e)=>{
+//     e.preventDefault();
+//     console.log(values);
+//     setvalues({
+//       image:"",
+//       name: "",
+//       phone: "",
+//       detail: ""
+//     });
   
-    setDatas([...datas,values]);
-    if(isEdit){
-      const index = datas.findIndex((item) => item.id === values.id);
-      const newItem = [...datas];
-      newItem.splice(index, 1, values);
-      setDatas(newItem);
+//     setDatas([...datas,values]);
+//     if(isEdit){
+//       const index = datas.findIndex((item) => item.id === values.id);
+//       const newItem = [...datas];
+//       newItem.splice(index, 1, values);
+//       setDatas(newItem);
       
-    setisEdit(false);
-    }
-     else {
-      const id = uuidv4();
-      setDatas([{ id, ...values }, ...datas]);
-    }
+//     setisEdit(false);
+//     }
+//      else {
+//       const id = uuidv4();
+//       setDatas([{ id, ...values }, ...datas]);
+//     }
    
-}
-const deleteTableRows = (index)=>{
-    const rows = [...datas];
-    rows.splice(index, 1);
-    setDatas(rows);
-}
-const handleEdit = (item) => {
-    setisEdit(true);
-    setvalues(item);
-  };
+// }
+// const deleteTableRows = (index)=>{
+//     const rows = [...datas];
+//     rows.splice(index, 1);
+//     setDatas(rows);
+// }
+// const handleEdit = (item) => {
+//     setisEdit(true);
+//     setvalues(item);
+//   };
   
 
 
@@ -65,6 +74,13 @@ const handleEdit = (item) => {
     return(
         <div className="flex gap-40 container mt-10">
             <div >
+
+  <label className="block m-4">Result:<input type="text" name="result"value={value} className="mx-4"/></label>
+  <button className="border-2 m-2 p-2 bg-green-500"onClick={()=>dispatch(increment(inputnumber))}>Increment</button>
+<input type="Number" name="number"value={inputnumber} onChange={handelInputChange}/>
+<button className="border-2 m-2 p-2 bg-red-500"onClick={()=>dispatch(decrement(inputnumber))}>Decrement</button>
+
+{/* 
                 <form >
                     <label>Select Image</label>
                     <input type="file" name="image" onChange={handlechange} className="block"/>
@@ -116,7 +132,7 @@ const handleEdit = (item) => {
                   </tr>
                   ))}
                     </tbody>
-                </table>
+                </table> */}
             </div>
 
         </div>

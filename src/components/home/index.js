@@ -11,7 +11,7 @@ const HomePage = (props) => {
   return (
     <>
       <Firstpage/>
-      <Toptable/>
+      <Toptable />
       <Toppicks {...props}/>
       <Sofa/>
       <Blogs {...props}/>

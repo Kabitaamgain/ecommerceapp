@@ -1,14 +1,25 @@
 import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import axios from "axios";
+import { updateShopItems } from "../utils/shopApiAction";
+import { fetchShopsItems,saveShopItems,deleteShopItem } from "../utils/shopApiAction";
 
 
 const AddShops=({items,setItems})=>{
- 
+ console.log(items)
     // const [items, setItems] = useState([]);
     const [isEdit,setisEdit]=useState(false);
+    const [base64Image, setBase64Image] = useState("");
+
+    const convertToBase64 = (file) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        console.log("called: ", reader);
+        setBase64Image(reader.result);
+      };
+    };
     const [values,setvalues]=useState({
-        image:null,
+        image:"",
         title:"",
         price:"",
         details:"",
@@ -19,6 +30,7 @@ const AddShops=({items,setItems})=>{
         const {name, value,type}= e.target;
         if(type==="file"){
           setvalues({...values,[name]: e.target.files[0]})
+          convertToBase64(e.target.files[0]);
         }
       
         else{
@@ -30,41 +42,45 @@ const AddShops=({items,setItems})=>{
 
        
     };
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e)=> {
+      const id = uuidv4();
         e.preventDefault();
         console.log(values);
     
-      setItems([...items,values]);
+      setItems([{id,...values},...items]);
 if(isEdit){
-  const index = items.findIndex((item) => item.id === values.id);
-  const newItem = [...items];
-  newItem.splice(index, 1, values);
-  setItems(newItem);
+  // const index = items.findIndex((item) => item.id === values.id);
+  // const newItem = [...items];
+  // newItem.splice(index, 1, {...values, image:base64Image?base64Image: values.image});
+  // setItems(newItem);
 
-axios.put(`http://localhost:5000/shop/${values.id}`,{...values})
-.then((res)=>console.log(res.data))
-.catch((error)=>console.log(error));
-
+// instance.put(`/shop/${values.id}`,{...values})
+// .then((res)=>console.log(res.data))
+// .catch((error)=>console.log(error));
+await updateShopItems({
+ ...values, image:base64Image?base64Image: values.image
+});
+await fetchShopsItems(setItems);
 setisEdit(false);
 }
  else {
-  const id = uuidv4();
-  setItems([{ id, ...values }, ...items]);
+ 
+  // setItems([{ id, ...values,image: base64Image }, ...items]);
 
-   axios.post("http://localhost:5000/shop",{
+//    instance.post("/shop",{
+//   id,
+//   ...values, image: base64Image, ...items
+// })
+// .then((response)=>console.log(response.items))
+//   .catch((error)=>console.log(error));
+
+await saveShopItems({
   id,
   ...values,
-  ...items
-})
-.then((response)=>console.log(response.data))
-  .catch((error)=>console.log(error));
-
-  axios.get("http://localhost:5000/shop/658d3b55-12e3-443c-b00e-16076bae07c1,")
-  .then((response)=>console.log(response))
-  .catch((error)=>console.log(error));
-  }
-
-  
+  image: base64Image,
+});
+await fetchShopsItems(setItems);
+}
 
       setvalues({
         image: null,
@@ -75,10 +91,16 @@ setisEdit(false);
 
     };
   
-     const deleteTableRows = (index)=>{
-      const rows = [...items];
-      rows.splice(index, 1);
-      setItems(rows);
+     const deleteTableRows = async(id)=>{
+      
+    await deleteShopItem(id);
+    await fetchShopsItems(setItems);
+      
+      // instance.delete(`/shop/${id}`)
+      // .then((response)=>console.log(response.item))
+      // .catch((error)=>console.log(error));
+      // setItems(items.filter((item) => item.id !== id));
+
  };
  const handleEdit = (item) => {
   setisEdit(true);
@@ -130,7 +152,7 @@ setisEdit(false);
                     <td className="px-4 py-2">{item.id}</td>
                     <td className="px-4 py-2">  {item.image && (
                             <img
-                              src={URL.createObjectURL(item.image)}
+                              src={item.image}
                               alt=""
                               className="w-20 h-20 object-contain"
                             />)}
@@ -143,7 +165,7 @@ setisEdit(false);
                       <button className="px-3 text-sm py-2 rounded bg-blue-100" onClick={() => handleEdit(item)}>
                         Edit
                       </button>
-                      <button className="px-3 text-sm py-2 rounded bg-red-200 ml-2" onClick={deleteTableRows}>
+                      <button className="px-3 text-sm py-2 rounded bg-red-200 ml-2" onClick={() => deleteTableRows(item.id)}>
                         Delete
                       </button>
                       </div>

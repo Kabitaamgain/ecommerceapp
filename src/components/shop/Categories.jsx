@@ -1,6 +1,5 @@
 import React from "react";
 import * as Icons from "../../assets/icons";
-import * as Images from "../../assets/images";
 import { ToppicksCard } from "../shared/ToppicksCard";
 
 // const ToppickArray = [
@@ -134,9 +133,12 @@ export const Categories = ({items}) => {
         <div className="grid grid-cols-4 gap-7 container">
           {items.map((Toppick, index) => {
             
-            const {image, title, price } = Toppick;
+            const {id,image, title, price } = Toppick;
             return (
-              <ToppicksCard key={Toppick.id} src={image} imgAlt={title} title={title} price={price} />
+              <div>
+              <ToppicksCard key={Toppick.id} id={id} src={image} imgAlt={title} title={title} price={price} />
+             
+            </div>
             )
           })}
         </div>

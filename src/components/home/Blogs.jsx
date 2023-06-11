@@ -1,5 +1,4 @@
 import React from "react";
-import * as Images from "../../assets/images"
 import * as Icons from "../../assets/icons"
 import { BlogsCard } from "../shared/BlogsCard";
 import { Button } from "../shared/Button";

@@ -4,34 +4,34 @@ import { ToppicksCard } from "../shared/ToppicksCard";
 import { Button } from "../shared/Button";
 // import { Link } from "react-router-dom";
 
-const ToppickArray=[
-    {
-  imgSrc: Images.Image4,
-  imgAlt:"image4",
-  title:"Trenton modular sofa_3",
-  price:"Rs. 25,000.00"
-    },
-{
-    imgSrc: Images.Image5,
-    imgAlt:"image5",
-    title:"Granite dining table with dining chair",
-    price:"Rs. 25,000.00"
-      },
-      {
-        imgSrc: Images.Image7,
-        imgAlt:"image6",
-        title:"Outdoor bar table and stool",
-        price:"Rs. 25,000.00"
-          },
-          {
-            imgSrc: Images.Image6,
-            imgAlt:"image7",
-            title:"Plain console with teak mirror",
-            price:"Rs. 25,000.00"
-              },
-];
+// const ToppickArray=[
+//     {
+//   imgSrc: Images.Image4,
+//   imgAlt:"image4",
+//   title:"Trenton modular sofa_3",
+//   price:"Rs. 25,000.00"
+//     },
+// {
+//     imgSrc: Images.Image5,
+//     imgAlt:"image5",
+//     title:"Granite dining table with dining chair",
+//     price:"Rs. 25,000.00"
+//       },
+//       {
+//         imgSrc: Images.Image7,
+//         imgAlt:"image6",
+//         title:"Outdoor bar table and stool",
+//         price:"Rs. 25,000.00"
+//           },
+//           {
+//             imgSrc: Images.Image6,
+//             imgAlt:"image7",
+//             title:"Plain console with teak mirror",
+//             price:"Rs. 25,000.00"
+//               },
+// ];
 
-export const Toppicks=()=>{
+export const Toppicks=({items})=>{
     return(
         <div className="pt-14 container">
             <div className="text-center">
@@ -40,10 +40,10 @@ export const Toppicks=()=>{
             </div>
 
             <div className="flex gap-7">
-                {ToppickArray.map((Toppick,index)=>{
-         const {imgSrc,imgAlt,title,price}=Toppick;
+                {items.map((Toppick,index)=>{
+         const {image,imgAlt,title,price}=Toppick;
          return(
-            <ToppicksCard key={index} imgSrc={imgSrc} imgAlt={imgAlt} title={title} price={price}/>
+            <ToppicksCard key={index} src={image} imgAlt={imgAlt} title={title} price={price}/>
          )
                 })} 
                 </div>
